@@ -334,6 +334,13 @@ $filename = basename($_SERVER['PHP_SELF']);
       
 
       <li class="nav-item">
+        <a class="nav-link collapsed" href="test_summary.php">
+          <i class="bi bi-card-list"></i>
+          <span>Test Summary</span>
+        </a>
+      </li><!-- End Login Page Nav -->
+
+      <li class="nav-item">
         <a class="nav-link collapsed" href="signout.php">
           <i class="bi bi-box-arrow-right"></i>
           <span>Logout</span>

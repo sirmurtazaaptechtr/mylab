@@ -177,9 +177,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <?php } ?>
                             </div>
                             <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">Submit Button</label>
+                                <label class="col-sm-2 col-form-label">Save Test Result</label>
                                 <div class="col-sm-10">
-                                    <button type="submit" class="btn btn-primary" name="submitBtn">Submit Form</button>
+                                    <button type="submit" class="btn btn-primary" name="submitBtn">Save</button>
                                 </div>
                             </div>
                         </form><!-- End General Form Elements -->
