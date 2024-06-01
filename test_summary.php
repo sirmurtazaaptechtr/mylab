@@ -3,10 +3,10 @@
 require('./include/header.php');
 
 // Query to fetch summary data
-$sql_summary = "SELECT t.name AS test_name, COUNT(r.result_id) AS test_count 
+$sql_summary = "SELECT t.test_name, COUNT(r.result_id) AS test_count 
                 FROM tests t 
                 LEFT JOIN results r ON t.test_id = r.test_id 
-                GROUP BY t.name";
+                GROUP BY t.test_name";
 $summary_result = mysqli_query($conn, $sql_summary);
 ?>
 

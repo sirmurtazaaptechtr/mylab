@@ -2,7 +2,13 @@
 require('./include/header.php');
 
 // Fetch all test results
-$sql_results = "SELECT * FROM results r JOIN persons p ON r.person_id = p.person_id";
+$sql_results = "SELECT * FROM `persons` 
+INNER JOIN `results` ON `persons`.person_id = `results`.person_id
+INNER JOIN `tests` ON `tests`.test_id = `results`.test_id
+LEFT JOIN `logins` ON `persons`.person_id = `logins`.person_id
+LEFT JOIN `genders` ON `persons`.gender_id = `genders`.gender_id
+LEFT JOIN `maritial_statuses` ON `persons`.ms_id = `maritial_statuses`.ms_id
+";
 $all_results = mysqli_query($conn, $sql_results);
 ?>
 
@@ -31,6 +37,8 @@ $all_results = mysqli_query($conn, $sql_results);
                                     <th scope="col">Dept #</th>
                                     <th scope="col">Test Date</th>
                                     <th scope="col">Result Date</th>
+                                    <th scope="col">Test</th>
+                                    <th scope="col">Result</th>
                                     <th scope="col">Name</th>
                                     <th scope="col">Gender</th>
                                     <th scope="col">Marital Status</th>
@@ -45,9 +53,11 @@ $all_results = mysqli_query($conn, $sql_results);
                                         <td><?php echo $result['dept_no']; ?></td>
                                         <td><?php echo $result['test_date']; ?></td>
                                         <td><?php echo $result['result_date']; ?></td>
+                                        <td><?php echo $result['test_name']; ?></td>
+                                        <td><?php echo $result['result_value']; ?></td>
                                         <td><?php echo $result['name']; ?></td>
                                         <td><?php echo $result['gender']; ?></td>
-                                        <td><?php echo $result['marital_status']; ?></td>
+                                        <td><?php echo $result['status']; ?></td>
                                         <td><?php echo $result['contact']; ?></td>
                                         <td>
                                             <a href="edittestresult.php?id=<?php echo $result['result_id']; ?>" class="btn btn-warning">Edit</a>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 30, 2024 at 02:26 PM
+-- Generation Time: Jun 01, 2024 at 02:19 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -90,7 +90,8 @@ INSERT INTO `maritial_statuses` (`ms_id`, `status`) VALUES
 CREATE TABLE `persons` (
   `person_id` int(11) NOT NULL,
   `name` varchar(64) NOT NULL,
-  `dob` date NOT NULL,
+  `dob` date DEFAULT NULL,
+  `age` decimal(10,0) NOT NULL,
   `contact` varchar(16) DEFAULT NULL,
   `gender_id` int(11) DEFAULT NULL,
   `ms_id` int(11) DEFAULT NULL,
@@ -101,8 +102,10 @@ CREATE TABLE `persons` (
 -- Dumping data for table `persons`
 --
 
-INSERT INTO `persons` (`person_id`, `name`, `dob`, `contact`, `gender_id`, `ms_id`, `role_id`) VALUES
-(1, 'Syed Murtaza Hussain', '1984-12-03', '0314-2308332', 1, 2, 1);
+INSERT INTO `persons` (`person_id`, `name`, `dob`, `age`, `contact`, `gender_id`, `ms_id`, `role_id`) VALUES
+(1, 'Syed Murtaza Hussain', '1984-12-03', '0', '0314-2308332', 1, 2, 1),
+(7, 'aaaa', '2024-05-31', '0', '11111', 2, 2, 3),
+(8, 'Ali Baba', '2024-05-31', '0', '0312-1234567', 1, 1, 3);
 
 -- --------------------------------------------------------
 
@@ -112,16 +115,40 @@ INSERT INTO `persons` (`person_id`, `name`, `dob`, `contact`, `gender_id`, `ms_i
 
 CREATE TABLE `results` (
   `result_id` int(11) NOT NULL,
-  `result_date` date NOT NULL,
-  `result` varchar(16) NOT NULL,
+  `result_date` date DEFAULT NULL,
+  `result_value` varchar(16) DEFAULT NULL,
   `test_id` int(11) DEFAULT NULL,
-  `test_date` date NOT NULL,
+  `test_date` date DEFAULT NULL,
   `person_id` int(11) DEFAULT NULL,
   `lab_no` varchar(25) DEFAULT NULL,
   `dept_no` varchar(25) DEFAULT NULL,
   `ref_phy` varchar(25) DEFAULT NULL,
-  `description` text NOT NULL
+  `result_desc` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `results`
+--
+
+INSERT INTO `results` (`result_id`, `result_date`, `result_value`, `test_id`, `test_date`, `person_id`, `lab_no`, `dept_no`, `ref_phy`, `result_desc`) VALUES
+(9, '2024-05-31', '1', 1, '2024-05-31', 7, '1', '1', NULL, '111'),
+(10, '2024-05-31', '1', 2, '2024-05-31', 7, '1', '1', NULL, '111'),
+(11, '2024-05-31', '1', 3, '2024-05-31', 7, '1', '1', NULL, '111'),
+(12, '2024-05-31', '1', 4, '2024-05-31', 7, '1', '1', NULL, '111'),
+(13, '2024-05-31', '1', 5, '2024-05-31', 7, '1', '1', NULL, '111'),
+(14, '2024-05-31', '1', 6, '2024-05-31', 7, '1', '1', NULL, '111'),
+(15, '2024-05-31', '1', 7, '2024-05-31', 7, '1', '1', NULL, '111'),
+(16, '2024-05-31', '1', 8, '2024-05-31', 7, '1', '1', NULL, '111'),
+(17, '2024-05-31', NULL, 9, '2024-05-31', 7, '1', '1', NULL, '111'),
+(18, '2024-05-31', '10', 1, '2024-05-31', 8, '1', '1', NULL, 'ABC ++ PQR --'),
+(19, '2024-05-31', '12', 2, '2024-05-31', 8, '1', '1', NULL, 'ABC ++ PQR --'),
+(20, '2024-05-31', '17.5', 3, '2024-05-31', 8, '1', '1', NULL, 'ABC ++ PQR --'),
+(21, '2024-05-31', '19', 4, '2024-05-31', 8, '1', '1', NULL, 'ABC ++ PQR --'),
+(22, '2024-05-31', '66.8', 5, '2024-05-31', 8, '1', '1', NULL, 'ABC ++ PQR --'),
+(23, '2024-05-31', '123456', 6, '2024-05-31', 8, '1', '1', NULL, 'ABC ++ PQR --'),
+(24, '2024-05-31', '321848', 7, '2024-05-31', 8, '1', '1', NULL, 'ABC ++ PQR --'),
+(25, '2024-05-31', '21684161613', 8, '2024-05-31', 8, '1', '1', NULL, 'ABC ++ PQR --'),
+(26, '2024-05-31', NULL, 9, '2024-05-31', 8, '1', '1', NULL, 'ABC ++ PQR --');
 
 -- --------------------------------------------------------
 
@@ -151,7 +178,7 @@ INSERT INTO `roles` (`role_id`, `role`) VALUES
 
 CREATE TABLE `tests` (
   `test_id` int(11) NOT NULL,
-  `name` varchar(64) NOT NULL,
+  `test_name` varchar(64) NOT NULL,
   `description` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -159,7 +186,7 @@ CREATE TABLE `tests` (
 -- Dumping data for table `tests`
 --
 
-INSERT INTO `tests` (`test_id`, `name`, `description`) VALUES
+INSERT INTO `tests` (`test_id`, `test_name`, `description`) VALUES
 (1, 'HB', 'Hemoglobin'),
 (2, 'WBC', 'White Blood Cells '),
 (3, 'MP', 'Malarial Parasite'),
@@ -168,7 +195,12 @@ INSERT INTO `tests` (`test_id`, `name`, `description`) VALUES
 (6, 'MCH', 'Mean Corpuscular Hemoglobin'),
 (7, 'MCHC', 'Mean Corpuscular Hemoglobin Concentration'),
 (8, 'RBC', 'Red Blood Cell'),
-(9, 'Platelets', 'Platelets');
+(9, 'Platelets', 'Platelets'),
+(10, 'Hypochromic', 'Hypochromic'),
+(11, 'Macrocytosis', 'Macrocytosis'),
+(12, 'Microcytosis', 'Microcytosis'),
+(13, 'Anisocytosis', 'Anisocytosis'),
+(14, 'Poikilocytosis', 'Poikilocytosis');
 
 --
 -- Indexes for dumped tables
@@ -242,13 +274,13 @@ ALTER TABLE `maritial_statuses`
 -- AUTO_INCREMENT for table `persons`
 --
 ALTER TABLE `persons`
-  MODIFY `person_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `person_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `results`
 --
 ALTER TABLE `results`
-  MODIFY `result_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `result_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -260,7 +292,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `tests`
 --
 ALTER TABLE `tests`
-  MODIFY `test_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `test_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Constraints for dumped tables
