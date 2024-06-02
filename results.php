@@ -60,8 +60,8 @@ $all_results = mysqli_query($conn, $sql_results);
                                         <td><?php echo $result['status']; ?></td>
                                         <td><?php echo $result['contact']; ?></td>
                                         <td>
-                                            <a href="edittestresult.php?id=<?php echo $result['result_id']; ?>" class="btn btn-warning">Edit</a>
-                                            <a href="deletetestresult.php?id=<?php echo $result['result_id']; ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this record?')">Delete</a>
+                                            <a href="edittestresult.php?result_id=<?php echo $result['result_id']; ?>" class="btn btn-warning">Edit</a>
+                                            <a href="deletetestresult.php?result_id=<?php echo $result['result_id']; ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this record?')">Delete</a>
                                         </td>
                                     </tr>
                                 <?php } ?>
