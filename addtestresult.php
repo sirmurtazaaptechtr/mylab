@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $test_values = [];
 
     // Test results
-    $tests = ['RBC', 'WBC', 'HB', 'PCV', 'MCV', 'MCH', 'MCHC', 'Platelets', 'Hypochromic', 'Macrocytosis', 'Microcytosis', 'Anisocytosis', 'Poikilocytosis'];
+    $tests = ['HB', 'WBC', 'MP', 'PCV', 'MCV', 'MCH', 'MCHC', 'RBC', 'Platelets', 'Hypochromic', 'Macrocytosis', 'Microcytosis', 'Anisocytosis', 'Poikilocytosis'];
 
     // Start transaction
     mysqli_begin_transaction($conn);
@@ -179,7 +179,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <h5 class="text-center">Test Results</h5>
                             <div class="row mb-3 g-3">
                                 <?php
-                                $tests = ['RBC', 'WBC', 'HB', 'PCV', 'MCV', 'MCH', 'MCHC', 'Platelets', 'Hypochromic', 'Macrocytosis', 'Microcytosis', 'Anisocytosis', 'Poikilocytosis'];
+                                $tests = ['HB', 'WBC', 'MP', 'PCV', 'MCV', 'MCH', 'MCHC', 'RBC', 'Platelets', 'Hypochromic', 'Macrocytosis', 'Microcytosis', 'Anisocytosis', 'Poikilocytosis'];
                                 foreach ($tests as $test) { ?>
                                     <div class="col-md-3">
                                         <div class="col-md-12">
